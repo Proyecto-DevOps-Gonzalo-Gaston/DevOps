@@ -64,7 +64,7 @@ jobs:
           aws-region: ${{secrets.AWS_DEFAULT_REGION}}
 
       - name: S3 Deploy
-        run: ./.github/scripts/deploy.sh
+        run: Proyecto-DevOps-Gonzalo-Gaston/DevOps/.github/scripts/deploy.sh
         shell: bash
         env:
           S3_ORIGIN_BUCKET: ${{ secrets.S3_ORIGIN_BUCKET }}
