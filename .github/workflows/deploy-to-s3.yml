@@ -48,7 +48,7 @@ jobs:
         run: npm ci
 
       - name: Build NextJS static site
-        run: ./.github/scripts/build.sh
+        run: Proyecto-DevOps-Gonzalo-Gaston/DevOps/.github/scripts/build.sh
         shell: bash
         env:
           CI_ENV: ${{ inputs.CI_ENV }}
