@@ -1,0 +1,1 @@
+El archivo DevOpsFe contiene archivos necesarios para el proceso github actions, que necesariamente tiene que estar en el repositorio Proyecto_FrontEnd donde pueda leer el contenido de package.json de FE.
