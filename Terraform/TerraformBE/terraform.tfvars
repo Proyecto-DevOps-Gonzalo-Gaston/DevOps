@@ -1,8 +1,9 @@
+vpc_name = "be-devops-gg-vpc"
 cluster_name = "fargate-ecs-proyecto-gg"
-services_name = ["be-svc-orders",
-  "be-svc-payments",
-  "be-svc-products",
-"be-svc-shipping"]
+services_name = ["be-orders-svc",
+  "be-payments-svc",
+  "be-products-svc",
+"be-shipping-svc"]
 tasks_definitions = ["be-taskdef-orders",
   "be-taskdef-payments",
   "be-taskdef-products",
