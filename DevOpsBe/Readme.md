@@ -1,0 +1,1 @@
+El archivo DevOpsBE contiene archivos necesarios para el proceso github actions, que necesariamente tiene que estar en el repositorio donde pueda leer el contenido de package.json de BE.
