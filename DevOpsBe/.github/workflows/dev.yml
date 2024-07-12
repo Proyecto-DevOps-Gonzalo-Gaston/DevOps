@@ -1,8 +1,9 @@
 name: Build, test and Deploy DEV BE
 
 on:
-  repository_dispatch:
-    types: [build]
+  push:
+    branches:
+      - Develop
 
 jobs:
   build:
