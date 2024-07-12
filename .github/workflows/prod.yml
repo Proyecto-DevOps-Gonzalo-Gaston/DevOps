@@ -26,16 +26,18 @@ jobs:
         run: mvn -B package --file pom.xml
 
   test:
-    - name: Checkout código
-      uses: actions/checkout@v2
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
 
-    - name: Set up JDK
-      uses: actions/setup-java@v2
-      with:
-        java-version: '8' 
-        distribution: 'adopt'
-        server-id: github
-        settings-path: ${{ github.workspace }}
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8' 
+          distribution: 'adopt'
+          server-id: github
+          settings-path: ${{ github.workspace }}
 
-    - name: Run Tests with Maven
-      run: mvn test
+      - name: Run Tests with Maven
+        run: mvn test

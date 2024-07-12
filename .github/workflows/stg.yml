@@ -3,11 +3,10 @@ name: CI/CD with Maven
 on:
   push:
     branches:
-      - Staging
+      - main
 
 jobs:
   build:
-    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
@@ -27,16 +26,19 @@ jobs:
         run: mvn -B package --file pom.xml
 
   test:
-    - name: Checkout código
-      uses: actions/checkout@v2
+    runs-on: ubuntu-latest 
 
-    - name: Set up JDK
-      uses: actions/setup-java@v2
-      with:
-        java-version: '8' 
-        distribution: 'adopt'
-        server-id: github
-        settings-path: ${{ github.workspace }}
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
 
-    - name: Run Tests with Maven
-      run: mvn test
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8' 
+          distribution: 'adopt'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Run Tests with Maven
+        run: mvn test
