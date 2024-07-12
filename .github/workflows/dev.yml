@@ -26,7 +26,7 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-   test:
+  test:
     - name: Checkout código
       uses: actions/checkout@v2
 
