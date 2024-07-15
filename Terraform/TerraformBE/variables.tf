@@ -30,12 +30,22 @@ variable "vpc_name" {
   type        = string
 }
 
-variable "target_group"{
+variable "target_group" {
   description = "Name of targets groups"
   type        = list(string)
 }
 
-variable "load_balancers"{
+variable "load_balancers" {
   description = "Name of loads balancers"
+  type        = list(string)
+}
+
+variable "container_definitions" {
+  description = "Name of container definitions"
+  type        = list(string)
+}
+
+variable "container_images" {
+  description = "Temp, url of container images"
   type        = list(string)
 }

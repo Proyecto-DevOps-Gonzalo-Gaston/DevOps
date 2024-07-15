@@ -19,3 +19,7 @@ data "aws_ami" "amzlinux" {
     values = ["x86_64"]
   }
 }
+
+data "aws_iam_role" "LabRole" {
+  name = "LabRole"
+}
