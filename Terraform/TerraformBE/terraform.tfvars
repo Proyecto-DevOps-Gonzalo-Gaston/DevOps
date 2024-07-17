@@ -1,32 +1,32 @@
 vpc_name     = "be-devops-gg-vpc"
-cluster_name = "fargate-cluster-be-gg2" //Los nombres que terminan en 2, significa que tiene que ser unico y ya tenemos el tuyo creado ;)
+cluster_name = "fargate-cluster-be-gg"
 services_name = ["be-payments-svc",
-"be-products-svc",
-"be-shipping-svc",
+  "be-products-svc",
+  "be-shipping-svc",
 "be-orders-svc"]
-tasks_definitions = ["be-taskdef-payments2",
-"be-taskdef-products2",
-"be-taskdef-shipping2",
-"be-taskdef-orders2"]
-ecr_names = ["proyecto-devops-gg-payments2",
-"proyecto-devops-gg-products2",
-"proyecto-devops-gg-shipping2",
-"proyecto-devops-gg-orders2"]
-target_group = ["be-payments-tg2",
-"be-products-tg2",
-"be-shipping-tg2",
-"be-orders-tg2"]
-load_balancers = ["be-payments-lb2",
-"be-products-lb2",
-"be-shipping-lb2",
-"be-orders-lb2"]
+tasks_definitions = ["be-taskdef-payments",
+  "be-taskdef-products",
+  "be-taskdef-shipping",
+"be-taskdef-orders"]
+target_group = ["be-payments-tg",
+  "be-products-tg",
+  "be-shipping-tg",
+"be-orders-tg"]
+load_balancers = ["be-payments-lb",
+  "be-products-lb",
+  "be-shipping-lb",
+"be-orders-lb"]
 container_definitions = ["be-payments",
-"be-products",
-"be-shipping",
+  "be-products",
+  "be-shipping",
 "be-orders"]
- container_images = [
+container_images = [
   "333417458425.dkr.ecr.us-east-1.amazonaws.com/proyecto-devops-gg-payments:prod",
   "333417458425.dkr.ecr.us-east-1.amazonaws.com/proyecto-devops-gg-products:prod",
   "333417458425.dkr.ecr.us-east-1.amazonaws.com/proyecto-devops-gg-shipping:prod",
   "333417458425.dkr.ecr.us-east-1.amazonaws.com/proyecto-devops-gg-orders:prod"
 ]
+ecr_names = ["proyecto-devops-gg-payments",
+  "proyecto-devops-gg-products",
+  "proyecto-devops-gg-shipping",
+"proyecto-devops-gg-orders"]

@@ -1,4 +1,3 @@
-
 variable "aws_region" {
   description = "Region in which AWS Resources to be created"
   type        = string
@@ -17,11 +16,6 @@ variable "services_name" {
 
 variable "tasks_definitions" {
   description = "Name of tasks definitions"
-  type        = list(string)
-}
-
-variable "ecr_names" {
-  description = "Name of Ecrs"
   type        = list(string)
 }
 
@@ -46,6 +40,11 @@ variable "container_definitions" {
 }
 
 variable "container_images" {
-  description = "Temp, url of container images"
+  description = "Url of container images"
+  type        = list(string)
+}
+
+variable "ecr_names" {
+  description = "Name of Ecrs"
   type        = list(string)
 }

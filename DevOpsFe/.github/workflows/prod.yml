@@ -8,52 +8,21 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  terraform-deploy:
+  Sonar:
     runs-on: ubuntu-latest
-
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Clone Terraform Repository
-        run: git clone --branch main https://github.com/Proyecto-DevOps-Gonzalo-Gaston/DevOps.git terraform
-
-      - name: Verify Cloned Directory
-        run: |
-          ls -l terraform
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-
-      - name: Terraform Init
-        run: |
-          cd terraform/Terraform/TerraformFE
-          terraform init
-
-      - name: Terraform Plan
-        run: |
-          cd terraform/Terraform/TerraformFE
-          terraform plan
-
-      - name: Terraform Apply
-        run: |
-          cd terraform/Terraform/TerraformFE
-          terraform apply -auto-approve || exit 0
-
-      - name: Terraform Apply 2
-        run: |
-          cd terraform/Terraform/TerraformFE
-          terraform apply -auto-approve
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build:
     runs-on: ubuntu-latest
-    needs : terraform-deploy
+    needs : Sonar
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -103,20 +72,6 @@ jobs:
 
       - name: Run tests
         run: npm test
-  
-  sonarcloud:
-    name: SonarCloud
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -129,7 +84,7 @@ jobs:
           name: build-artifacts
           path: dist/apps/catalog 
 
-      - name: Configure AWS credentials
+      - name: Configure AWS credentialss
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}

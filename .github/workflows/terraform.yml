@@ -1,0 +1,73 @@
+  name: Build terraform
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform-deploy-be:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: |
+          cd Terraform/TerraformBE
+          terraform init
+
+      - name: Terraform Plan
+        run: |
+          cd Terraform/TerraformFE
+          terraform plan
+
+      - name: Terraform Apply
+        run: |
+          cd Terraform/TerraformFE
+          terraform apply -auto-approve
+
+  terraform-deploy-fe:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: |
+          cd Terraform/TerraformFE
+          terraform init
+
+      - name: Terraform Plan
+        run: |
+          cd Terraform/TerraformFE
+          terraform plan
+
+      - name: Terraform Apply
+        run: |
+          cd Terraform/TerraformFE
+          terraform apply -auto-approve || exit 0
+
+      - name: Terraform Apply 2
+        run: |
+          cd terraform/Terraform/TerraformFE
+          terraform apply -auto-approve
+
+        
