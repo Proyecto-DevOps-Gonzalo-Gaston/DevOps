@@ -1,4 +1,4 @@
-ecr_names = ["proyecto-devops-gg-payments2",
-  "proyecto-devops-gg-products2",
-  "proyecto-devops-gg-shipping2",
-"proyecto-devops-gg-orders2"]
+ecr_names = ["proyecto-devops-gg-payments",
+  "proyecto-devops-gg-products",
+  "proyecto-devops-gg-shipping",
+"proyecto-devops-gg-orders"]
